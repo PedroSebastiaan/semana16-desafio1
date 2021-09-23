@@ -67,3 +67,6 @@ gem 'cocoon'
 
 # Dependency for cocoon
 gem 'jquery-rails'
+
+# Devise gem
+gem 'devise'
