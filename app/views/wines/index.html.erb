@@ -21,7 +21,13 @@
               <% [name = Strain.find(wine_strain.strain_id).name, percent = wine_strain.percentage] %>
             <% end %>
             <% strains.sort.each do |strain| %>
-              <%= strain %>
+              <% strain.each do |i| %>
+                <% if i%2 != 0 %>
+                  <%= i %>
+                <% else %>
+                  (<%= i.round %>%)
+                <% end %>
+              <% end %>
             <% end %>
         </td>
         <td><%= link_to 'Show', wine %></td>
