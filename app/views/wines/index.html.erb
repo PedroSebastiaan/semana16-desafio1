@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Strains</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,13 @@
     <% @wines.each do |wine| %>
       <tr>
         <td><%= wine.name %></td>
+        <td>
+            <% wine_strains = wine.wine_strains %>
+            <% wine_strains.each do |wine_strain| %>
+              <% strain = wine_strain.strain_id %>
+              <%= Strain.find(strain).name %>(<%= wine_strain.percentage.round %>%)
+            <% end %>
+        </td>
         <td><%= link_to 'Show', wine %></td>
         <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
         <td><%= link_to 'Destroy', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
