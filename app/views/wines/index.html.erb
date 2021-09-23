@@ -17,9 +17,11 @@
         <td><%= wine.name %></td>
         <td>
             <% wine_strains = wine.wine_strains %>
-            <% wine_strains.each do |wine_strain| %>
-              <% strain = wine_strain.strain_id %>
-              <%= Strain.find(strain).name %>(<%= wine_strain.percentage.round %>%)
+            <% strains = wine_strains.map do |wine_strain| %>
+              <% [name = Strain.find(wine_strain.strain_id).name, percent = wine_strain.percentage] %>
+            <% end %>
+            <% strains.sort.each do |strain| %>
+              <%= strain %>
             <% end %>
         </td>
         <td><%= link_to 'Show', wine %></td>
