@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_23_234853) do
+ActiveRecord::Schema.define(version: 2021_09_24_002245) do
+
+  create_table "magazines", force: :cascade do |t|
+    t.string "name"
+    t.boolean "editor"
+    t.boolean "reviewer"
+    t.boolean "writer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "oenologist_id"
+    t.index ["oenologist_id"], name: "index_magazines_on_oenologist_id"
+  end
+
+  create_table "oenologists", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.string "nationality"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "strains", force: :cascade do |t|
     t.string "name"
