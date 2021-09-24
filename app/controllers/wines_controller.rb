@@ -21,6 +21,8 @@ class WinesController < ApplicationController
 
   # GET /wines/1/edit
   def edit
+    @oenologists = Oenologist.all
+    @strains = Strain.all
   end
 
   # POST /wines or /wines.json
