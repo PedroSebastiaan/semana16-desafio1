@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :oenologist_id %>
+    <%= form.collection_select :oenologist_id, @oenologists, :id, :name %>
+  </div>
+
+  <div class="field">
     <%= form.label :editor %>
     <%= form.check_box :editor %>
   </div>

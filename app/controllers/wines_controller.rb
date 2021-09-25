@@ -1,6 +1,7 @@
 class WinesController < ApplicationController
   before_action :set_wine, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  before_action :not_admin, except: :index
 
   # GET /wines or /wines.json
   def index
@@ -23,6 +24,7 @@ class WinesController < ApplicationController
   def edit
     @oenologists = Oenologist.all
     @strains = Strain.all
+    @wine = Wine.find(params[:id])
   end
 
   # POST /wines or /wines.json
@@ -70,6 +72,10 @@ class WinesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def wine_params
-      params.require(:wine).permit(:name, wine_strains_attributes: [:strain_id, :percentage])
+      params.require(:wine).permit(:name, wine_strains_attributes: [:strain_id, :percentage], wine_scores_attributes: [:oenologist_id, :score])
+    end
+
+    def not_admin
+      redirect_to root_path, alert: "You'r not an admin." and return if !current_user.admin
     end
 end

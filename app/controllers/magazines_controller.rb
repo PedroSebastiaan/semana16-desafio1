@@ -13,15 +13,18 @@ class MagazinesController < ApplicationController
   # GET /magazines/new
   def new
     @magazine = Magazine.new
+    @oenologists = Oenologist.all
   end
 
   # GET /magazines/1/edit
   def edit
+    @oenologists = Oenologist.all
   end
 
   # POST /magazines or /magazines.json
   def create
     @magazine = Magazine.new(magazine_params)
+    @oenologists = Oenologist.all
 
     respond_to do |format|
       if @magazine.save
@@ -64,6 +67,6 @@ class MagazinesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def magazine_params
-      params.require(:magazine).permit(:name, :editor, :reviewer, :writer)
+      params.require(:magazine).permit(:name, :editor, :reviewer, :writer, :oenologist_id, oenologists_atributtes: [:id])
     end
 end
