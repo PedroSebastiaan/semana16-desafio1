@@ -7,6 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Strains</th>
+      <th>Scores</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -29,12 +30,26 @@
                 <% end %>
               <% end %>
             <% end %>
+          </ul>
         </td>
+        <td>
+          <% wine_scores = wine.wine_scores %>
+          <% scores = wine_scores.map do |wine_score| %>
+            <% [name = Oenologist.find(wine_score.oenologist_id).name, score = wine_score.score] %>
+          <% end %>
+          <ul>
+            <% scores.each do |score| %>
+              <li><%= score.first %>(<%= score.second %>)</li>
+            <% end %>
+          </ul>
+        </td>
+
         <% if current_user.email == "peter@gmail.com" %>
           <td><%= link_to 'Show', wine %></td>
           <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
           <td><%= link_to 'Destroy', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
+
       </tr>
     <% end %>
   </tbody>
