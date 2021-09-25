@@ -19,23 +19,19 @@
         <td>
             <% wine_strains = wine.wine_strains %>
             <% strains = wine_strains.map do |wine_strain| %>
-              <% [name = Strain.find(wine_strain.strain_id).name, percent = wine_strain.percentage] %>
+              <% [Strain.find(wine_strain.strain_id).name, wine_strain.percentage] %>
             <% end %>
-            <% strains.sort.each do |strain| %>
-              <% strain.each do |i| %>
-                <% if i%2 != 0 %>
-                  <%= i %>
-                <% else %>
-                  (<%= i.round %>%)
-                <% end %>
+            <ul>
+              <% strains.sort.each do |strain| %>
+                <li><%= strain.first %>(<%= strain.second %>%)</li>
               <% end %>
-            <% end %>
+            </ul>
           </ul>
         </td>
         <td>
           <% wine_scores = wine.wine_scores %>
           <% scores = wine_scores.map do |wine_score| %>
-            <% [name = Oenologist.find(wine_score.oenologist_id).name, score = wine_score.score] %>
+            <% [Oenologist.find(wine_score.oenologist_id).name, wine_score.score] %>
           <% end %>
           <ul>
             <% scores.each do |score| %>
