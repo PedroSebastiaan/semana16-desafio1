@@ -21,27 +21,21 @@
     <%= form.number_field :year %>
   </div>
 
-  <div class="field" id="wine_strains">
-    <%= form.fields_for :wine_strains do |ff| %>
-      <%= render 'wine_strain_fields', f: ff %>
-    <% end %>
-  </div>
+  <br>
 
   <div class="links">
-    <%= link_to_add_association 'Add other strain', form, :wine_strains %>
+    <%= link_to_add_association 'Add an strain', form, :wine_strains %>
   </div>
 
-  <% if @wine.id != nil %>
-    <div class="field" id="wine_scores">
-      <%= form.fields_for :wine_scores do |ff| %>
-        <%= render 'wine_score_fields', f: ff %>
-      <% end %>
-    </div>
+  <br>
 
+  <% if @wine.id != nil %>
     <div class="links">
       <%= link_to_add_association 'Add score', form, :wine_scores %>
     </div>
   <% end %>
+
+  <br>
 
   <div class="actions">
     <%= form.submit %>
