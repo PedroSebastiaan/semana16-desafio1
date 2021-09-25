@@ -31,10 +31,10 @@
         <td>
           <% wine_scores = wine.wine_scores %>
           <% scores = wine_scores.map do |wine_score| %>
-            <% [Oenologist.find(wine_score.oenologist_id).name, wine_score.score] %>
+            <% [Oenologist.find(wine_score.oenologist_id).name, wine_score.score, Oenologist.find(wine_score.oenologist_id).age] %>
           <% end %>
           <ul>
-            <% scores.each do |score| %>
+            <% scores.sort_by { |obj| obj.third }.each do |score| %>
               <li><%= score.first %>(<%= score.second %>)</li>
             <% end %>
           </ul>
